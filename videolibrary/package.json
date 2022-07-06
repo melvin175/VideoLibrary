@@ -1,0 +1,39 @@
+{
+  "name": "videolibrary",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "license": "UNLICENSED",
+    "lint": "eslint ./ --ext js,jsx,ts,tsx"
+  },
+  "dependencies": {
+    "@heroicons/react": "^1.0.5",
+    "@next-auth/firebase-adapter": "^0.1.2-pr.183-76202b42.8",
+    "graphql": "^16.5.0",
+    "graphql-request": "^4.3.0",
+    "next": "12.1.0",
+    "next-auth": "^4.2.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hot-toast": "^2.2.0",
+    "react-responsive-carousel": "^3.2.22",
+    "tailwind-scrollbar-hide": "^1.1.7",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.18",
+    "@types/react": "^17.0.39",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "autoprefixer": "^10.4.2",
+    "eslint": "8.9.0",
+    "eslint-config-next": "12.1.0",
+    "eslint-plugin-react": "^7.28.0",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.5.5"
+  }
+}

@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#040714] text-gray-300;
+  }
+}
+
+@layer components {
+  .brand {
+    @apply flex relative h-52 w-60 sm:w-64 sm:h-36 border-[2px] border-[#f9f9f9] border-opacity-10 rounded-lg cursor-pointer
+    overflow-hidden shadow-xl hover:border-opacity-90;
+  }
+}
