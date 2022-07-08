@@ -1,7 +1,7 @@
 import React from "react";
 import Brands from "../components/Brands";
-import MoviesCollection from "../components/MoviesCollection";
-import ShowsCollection from "../components/ShowsCollection";
+import Section from "../components/Section";
+
 import Slider from "../components/Slider";
 import { gql, GraphQLClient } from "graphql-request";
 
@@ -48,6 +48,10 @@ export default function Home({ videos }) {
     return videos[Math.floor(Math.random() * videos.length)];
   };
 
+  const filterVideos = (videos, genre) => {
+    return videos.filter((video) => video.tags.includes(genre));
+  };
+
   console.log(videos);
   return (
     <div>
@@ -55,8 +59,10 @@ export default function Home({ videos }) {
         <Slider />
         <Brands />
 
-        <MoviesCollection />
-        <ShowsCollection />
+        <Section genre={"Sci-Fi"} videos={filterVideos(videos, "Sci-fi")} />
+        <Section genre={"Adventure"} />
+        <Section genre={"Comedy"} />
+        <Section genre={"Thriller"} />
       </main>
     </div>
   );
