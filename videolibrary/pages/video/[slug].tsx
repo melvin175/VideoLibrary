@@ -1,5 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
-
+import { useState } from "react";
 import React from "react";
 
 export const getServerSideProps = async (pageContext) => {
@@ -46,9 +46,57 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
-function video({ video }) {
-  console.log(video);
-  return <div className="text-center text-2xl mt-20">video</div>;
-}
+const changeToSeen = async (slug) => {
+  await fetch("/api/changeToSeen", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ slug }),
+  });
+};
 
-export default video;
+const Video = ({ video }) => {
+  const [watching, setWatching] = useState(false);
+  console.log();
+  return (
+    <>
+      {!watching && (
+        <img
+          className="video-image"
+          src={video[0].thumbnail.url}
+          alt={video[0].title}
+        />
+      )}
+      {!watching && (
+        <div className="info">
+          <p>{video[0].tags}</p>
+          <p>{video[0].desription}</p>
+          <a href="/">
+            <p>go back</p>
+          </a>
+          <button
+            className="video-overlay"
+            onClick={() => {
+              changeToSeen(video[0].slug);
+              watching ? setWatching(false) : setWatching(true);
+            }}
+          >
+            PLAY
+          </button>
+        </div>
+      )}
+      {watching && (
+        <video width="100%" controls>
+          <source src={video[0].mp4.url} type="video/mp4" />
+        </video>
+      )}
+      <div
+        className="info-footer"
+        onClick={() => (watching ? setWatching(false) : null)}
+      ></div>
+    </>
+  );
+};
+
+export default Video;

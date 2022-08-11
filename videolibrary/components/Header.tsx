@@ -21,12 +21,23 @@ export const Header = () => {
         src={watchout}
         alt="Logo"
       />
-      <div className="flex flex-grow justify-evenly max-w-2xl pt-8">
-        <HeaderItem title="HOME" Icon={HomeIcon} />
-        <HeaderItem title="TRENDING" Icon={LightningBoltIcon} />
-        <HeaderItem title="VERIFIED" Icon={BadgeCheckIcon} />
-        <HeaderItem title="WATCHLIST" Icon={CollectionIcon} />
-        <HeaderItem title="SEARCH" Icon={SearchIcon} />
+      <div className="hidden ml-10 md:flex items-center space-x-6">
+        <a className="header-link group">
+          <HomeIcon className="h-4" />
+          <span className="span">Home</span>
+        </a>
+        <a className="header-link group">
+          <LightningBoltIcon className="h-4" />
+          <span className="span">Search</span>
+        </a>
+        <a className="header-link group">
+          <BadgeCheckIcon className="h-4" />
+          <span className="span">Watchlist</span>
+        </a>
+        <a className="header-link group">
+          <CollectionIcon className="h-4" />
+          <span className="span">Originals</span>
+        </a>
       </div>
 
       <button className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200 items-center hidden md:block">

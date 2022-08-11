@@ -44,6 +44,8 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ videos }) {
+  console.log(videos);
+
   const randomVideo = (videos) => {
     return videos[Math.floor(Math.random() * videos.length)];
   };
@@ -52,7 +54,6 @@ export default function Home({ videos }) {
     return videos.filter((video) => video.tags.includes(genre));
   };
 
-  console.log(videos);
   return (
     <div>
       <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
@@ -60,9 +61,13 @@ export default function Home({ videos }) {
         <Brands />
 
         <Section genre={"Sci-Fi"} videos={filterVideos(videos, "Sci-fi")} />
-        <Section genre={"Adventure"} />
-        <Section genre={"Comedy"} />
-        <Section genre={"Thriller"} />
+        <Section
+          genre={"Adventure"}
+          videos={filterVideos(videos, "Adventure")}
+        />
+        <Section genre={"Comedy"} videos={filterVideos(videos, "Comedy")} />
+        <Section genre={"Thriller"} videos={videos} />
+        <Section genre={"Family"} videos={videos} />
       </main>
     </div>
   );
