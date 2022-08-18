@@ -4,6 +4,7 @@ import Section from "../components/Section";
 
 import Slider from "../components/Slider";
 import { gql, GraphQLClient } from "graphql-request";
+import { Header } from "../components/Header";
 
 export const getStaticProps = async () => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
@@ -13,7 +14,7 @@ export const getStaticProps = async () => {
     },
   });
 
-  const query = gql`
+  const videosquery = gql`
     query {
       videos {
         createdAt
@@ -32,22 +33,36 @@ export const getStaticProps = async () => {
       }
     }
   `;
+  const accountQuery = gql`
+    query {
+      account(where: { id: "cl464f0ei10uw0bpn90og7p1s" }) {
+        username
+        avatar {
+          url
+        }
+      }
+    }
+  `;
 
-  const data = await graphQLClient.request(query);
+  const accountData = await graphQLClient.request(accountQuery);
+  const account = accountData.account;
+
+  const data = await graphQLClient.request(videosquery);
   const videos = data.videos;
 
   return {
     props: {
       videos,
+      account,
     },
   };
 };
 
-export default function Home({ videos }) {
+export default function Home({ videos, account }) {
   console.log(videos);
 
-  const randomVideo = (videos) => {
-    return videos[Math.floor(Math.random() * videos.length)];
+  const unSeenVideos = (videos) => {
+    return videos.filter((video) => video.seen == false || video.seen == null);
   };
 
   const filterVideos = (videos, genre) => {
@@ -56,10 +71,11 @@ export default function Home({ videos }) {
 
   return (
     <div>
+      <Header account={account} />
       <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
         <Slider />
         <Brands />
-
+        <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
         <Section genre={"Sci-Fi"} videos={filterVideos(videos, "Sci-fi")} />
         <Section
           genre={"Adventure"}

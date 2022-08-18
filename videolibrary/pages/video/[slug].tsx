@@ -1,6 +1,7 @@
 import { gql, GraphQLClient } from "graphql-request";
 import { useState } from "react";
 import React from "react";
+import Image from "next/image";
 
 export const getServerSideProps = async (pageContext) => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
@@ -58,41 +59,45 @@ const changeToSeen = async (slug) => {
 
 const Video = ({ video }) => {
   const [watching, setWatching] = useState(false);
-  console.log();
+
   return (
     <>
       {!watching && (
-        <img
-          className="video-image"
+        <Image
+          className="w-[100%] top-0 relative"
           src={video[0].thumbnail.url}
           alt={video[0].title}
+          layout="fill"
         />
       )}
+
       {!watching && (
-        <div className="info">
-          <p>{video[0].tags}</p>
+        <div className="relative mt-[25%] ml-24 w-8/12">
+          <p>{video[0].tags.join(" , ")}</p>
           <p>{video[0].desription}</p>
           <a href="/">
             <p>go back</p>
           </a>
           <button
-            className="video-overlay"
+            className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-1 px-3 rounded mt-5"
             onClick={() => {
               changeToSeen(video[0].slug);
               watching ? setWatching(false) : setWatching(true);
             }}
           >
-            PLAY
+            Play
           </button>
         </div>
       )}
+
       {watching && (
         <video width="100%" controls>
           <source src={video[0].mp4.url} type="video/mp4" />
         </video>
       )}
+
       <div
-        className="info-footer"
+        className="h-14 "
         onClick={() => (watching ? setWatching(false) : null)}
       ></div>
     </>
