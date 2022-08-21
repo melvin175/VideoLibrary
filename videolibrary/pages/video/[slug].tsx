@@ -26,6 +26,9 @@ export const getServerSideProps = async (pageContext) => {
         thumbnail {
           url
         }
+        wallpaper {
+          url
+        }
         mp4 {
           url
         }
@@ -65,7 +68,7 @@ const Video = ({ video }) => {
       {!watching && (
         <Image
           className="w-[100%] top-0 relative"
-          src={video[0].thumbnail.url}
+          src={video[0].wallpaper.url}
           alt={video[0].title}
           layout="fill"
         />
@@ -73,10 +76,15 @@ const Video = ({ video }) => {
 
       {!watching && (
         <div className="relative mt-[25%] ml-24 w-8/12">
-          <p>{video[0].tags.join(" , ")}</p>
           <p>{video[0].desription}</p>
+          <p>{video[0].tags.join(" , ")}</p>
           <a href="/">
-            <p>go back</p>
+            <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-1 px-3 m-2 rounded mt-5">
+              Go Back
+            </button>
+            <button className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-1 px-3 m-2 rounded mt-5">
+              Add to watchlist
+            </button>
           </a>
           <button
             className="bg-gray-100 hover:bg-gray-700 text-black font-bold py-1 px-3 rounded mt-5"

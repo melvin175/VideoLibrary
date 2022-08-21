@@ -1,13 +1,11 @@
 import React from "react";
-import Brands from "../components/Brands";
-import Section from "../components/Section";
 
-import MainSlider from "../components/MainSlider/MainSlider";
 import { gql, GraphQLClient } from "graphql-request";
 
 import Header from "../components/Header";
+import Section from "../components/Section";
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async (pageContext) => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
   const graphQLClient = new GraphQLClient(url, {
     headers: {
@@ -15,7 +13,7 @@ export const getStaticProps = async () => {
     },
   });
 
-  const videosquery = gql`
+  const query = gql`
     query {
       videos {
         createdAt
@@ -26,6 +24,9 @@ export const getStaticProps = async () => {
         seen
         tags
         thumbnail {
+          url
+        }
+        wallpaper {
           url
         }
         mp4 {
@@ -45,23 +46,21 @@ export const getStaticProps = async () => {
     }
   `;
 
+  const data = await graphQLClient.request(query);
+  const video = data.videos;
+
   const accountData = await graphQLClient.request(accountQuery);
   const account = accountData.account;
 
-  const data = await graphQLClient.request(videosquery);
-  const videos = data.videos;
-
   return {
     props: {
-      videos,
+      video,
       account,
     },
   };
 };
 
-export default function Home({ videos, account }) {
-  console.log(account);
-
+const pixar = ({ video, account }) => {
   const unSeenVideos = (videos) => {
     return videos.filter((video) => video.seen == false || video.seen == null);
   };
@@ -69,23 +68,20 @@ export default function Home({ videos, account }) {
   const filterVideos = (videos, genre) => {
     return videos.filter((video) => video.tags.includes(genre));
   };
-
+  console.log(account);
+  console.log(video);
   return (
-    <div>
+    <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
       <Header account={account} />
-      <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
-        <MainSlider />
-        <Brands />
-        <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
-        <Section genre={"Sci-Fi"} videos={filterVideos(videos, "Sci-fi")} />
-        <Section
-          genre={"Adventure"}
-          videos={filterVideos(videos, "Adventure")}
-        />
-        <Section genre={"Comedy"} videos={filterVideos(videos, "Comedy")} />
-        <Section genre={"Thriller"} videos={videos} />
-        <Section genre={"Family"} videos={videos} />
-      </main>
-    </div>
+
+      <Section
+        genre={"Movies by Marvel"}
+        videos={filterVideos(video, "Marvel")}
+      />
+      <Section genre={"Action Movies"} videos={filterVideos(video, "Action")} />
+      <Section genre={"Recommended for you"} videos={unSeenVideos(video)} />
+    </main>
   );
-}
+};
+
+export default pixar;

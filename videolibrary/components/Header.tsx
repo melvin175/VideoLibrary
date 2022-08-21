@@ -24,8 +24,8 @@ export const Header = ({ account }) => {
         alt="Logo"
       />
 
-      <div className="hidden ml-10 md:flex items-center space-x-6 mr-7">
-        <a className="header-link group ">
+      <div className="hidden ml-10 md:flex items-center space-x-6 mr-7 object-left">
+        <a className="header-link group " href="/">
           <HomeIcon className="h-4" />
           <span className="span">Home</span>
         </a>
@@ -47,30 +47,32 @@ export const Header = ({ account }) => {
         </a>
       </div>
 
-      {logged && (
-        <div className="account-info">
-          <p className="mt-1">Welcome {account.username}</p>
-          <img className="avatar" src={account.avatar.url} />
-          <button
-            className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200 items-center hidden md:block"
-            onClick={() => {
-              logged ? setLogged(false) : setLogged(true);
-            }}
-          >
-            Log out
-          </button>
-        </div>
-      )}
-
       {!logged && (
         <button
-          className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200 items-center hidden md:block"
+          className="ml-auto uppercase border px-4 py-1.5 rounded font-small tracking-wide hover:bg-white hover:text-black transition duration-200 items-center hidden md:block"
           onClick={() => {
             logged ? setLogged(false) : setLogged(true);
           }}
         >
           Login
         </button>
+      )}
+
+      {logged && (
+        <div className="account-info space-x-2">
+          <p className="truncate lg:text-exlipse hidden lg:block  ">
+            Welcome {account.username}
+          </p>
+          <img className="avatar hidden sm:block" src={account.avatar.url} />
+          <button
+            className="ml-auto border uppercase px-6 rounded font-sm tracking-wide hover:bg-white hover:text-black transition duration-200 items-center hidden lg:block md:text-sm text-center"
+            onClick={() => {
+              logged ? setLogged(false) : setLogged(true);
+            }}
+          >
+            <p className="truncate lg:text-exlipse">Log out</p>
+          </button>
+        </div>
       )}
     </header>
   );
