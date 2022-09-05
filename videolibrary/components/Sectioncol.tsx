@@ -1,14 +1,14 @@
 import React from "react";
-import Card from "./Card";
+import Slugcard from "./Slugcard";
 
 const Section = ({ genre, videos }) => {
   return (
-    <div className="relative flex flex-col space-y-2  mt-6 py-3  px-8 max-w-[1400px] mx-auto">
+    <div className="relative flex-col space-y-2 my-5 px-8 max-w-[408px] inset-y-0 right-0 hidden md:flex mr-5">
       <h2 className="font-semibold text-2xl">{genre}</h2>
-      <div className="flex space-x-6 overflow-y-hidden overflow-x-scroll scrollbar-hide p-2 -m-2">
+      <div className="space-x-6 overflow-y-hidden overflow-x-scroll scrollbar-hide p-2 -m-2">
         {videos.map((video) => (
           <a key={video.id} href={`/video/${video.slug}`}>
-            <Card video={video} />
+            <Slugcard video={video} />
           </a>
         ))}
       </div>

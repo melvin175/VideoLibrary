@@ -25,6 +25,7 @@ export const getStaticProps = async () => {
         slug
         seen
         tags
+        year
         thumbnail {
           url
         }
@@ -60,15 +61,14 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ videos, account }) {
-  console.log(account);
-
-  const unSeenVideos = (videos) => {
+  const toWatch = (videos) => {
     return videos.filter((video) => video.seen == false || video.seen == null);
   };
 
   const filterVideos = (videos, genre) => {
     return videos.filter((video) => video.tags.includes(genre));
   };
+  const noOfVideo = toWatch(videos).length;
 
   return (
     <div>
@@ -76,15 +76,20 @@ export default function Home({ videos, account }) {
       <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
         <MainSlider />
         <Brands />
-        <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
+        {noOfVideo > 0 && (
+          <Section genre={"Recommended for you"} videos={toWatch(videos)} />
+        )}
         <Section genre={"Sci-Fi"} videos={filterVideos(videos, "Sci-fi")} />
         <Section
           genre={"Adventure"}
           videos={filterVideos(videos, "Adventure")}
         />
         <Section genre={"Comedy"} videos={filterVideos(videos, "Comedy")} />
-        <Section genre={"Thriller"} videos={videos} />
-        <Section genre={"Family"} videos={videos} />
+        <Section
+          genre={"Animation"}
+          videos={filterVideos(videos, "Animation")}
+        />
+        <Section genre={"Family"} videos={filterVideos(videos, "Family")} />
       </main>
     </div>
   );

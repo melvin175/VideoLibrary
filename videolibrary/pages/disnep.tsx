@@ -24,6 +24,7 @@ export const getServerSideProps = async (pageContext) => {
         slug
         seen
         tags
+        year
         thumbnail {
           url
         }
@@ -69,8 +70,7 @@ const disnep = ({ video, account }) => {
   const filterVideos = (videos, genre) => {
     return videos.filter((video) => video.tags.includes(genre));
   };
-  console.log(account);
-  console.log(video);
+
   return (
     <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
       <Header account={account} />

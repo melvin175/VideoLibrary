@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 const Card = ({ video }) => {
   const [url, setUrl] = useState(video.thumbnail.url);
 
-const Card = ({ thumbnail }) => {
   return (
     <motion.div
       initial="hidden"
@@ -26,11 +25,11 @@ const Card = ({ thumbnail }) => {
       }}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.8 }}
-      className="relative flex min-w-[250px] min-h-[170px] md:min-w-[330px] md:min-h-[210px] rounded-lg overflow-hidden shadow-xl cursor-pointer border-[3px] border-[#f9f9f9] border-opacity-10  hover:border-opacity-80 hover:shadow-2xl transform hover:scale-105 transition duration-300"
+      className="relative flex min-w-[100px] min-h-[170px] md:min-w-[330px] md:min-h-[210px] rounded-lg overflow-hidden shadow-xl cursor-pointer border-[3px] border-[#f9f9f9] border-opacity-10  hover:border-opacity-80 hover:shadow-2xl transform hover:scale-105 transition duration-300"
     >
       <a className="absolute inset-0 z-10 flex flex-col justify-end opacity-0 hover:opacity-100 duration-300  ">
         <div className="bg-black bg-opacity-50 h-full">
-          <div className="mt-[25%] pl-6 text-xl text-opacity-100">
+          <div className="mt-[20%] pl-6 text-xl text-opacity-100">
             <h1 className="tracking-wider text-white-900 font-bold">
               {video.title}
             </h1>

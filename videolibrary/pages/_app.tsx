@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import "../styles/globals.css";
+import Head from "next/head";
 
 export default function App({
   Component,
@@ -7,6 +8,9 @@ export default function App({
 }) {
   return (
     <Layout>
+      <Head>
+        <title>Watchout</title>
+      </Head>
       <Component {...pageProps} />
     </Layout>
   );

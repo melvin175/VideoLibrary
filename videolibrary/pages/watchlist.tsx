@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { gql, GraphQLClient } from "graphql-request";
 
 import Header from "../components/Header";
 import Section from "../components/Section";
+import Image from "next/image";
+import W from "../public/images/w.png";
 
-export const getServerSideProps = async (pageContext) => {
+export const getServerSideProps = async () => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
   const graphQLClient = new GraphQLClient(url, {
     headers: {
@@ -22,6 +24,7 @@ export const getServerSideProps = async (pageContext) => {
         desription
         slug
         seen
+        toWatch
         tags
         year
         thumbnail {
@@ -61,26 +64,50 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
-const pixar = ({ video, account }) => {
-  const unSeenVideos = (videos) => {
-    return videos.filter((video) => video.seen == false || video.seen == null);
+const watchlist = ({ video, account }) => {
+  const toWatch = (videos) => {
+    return videos.filter(
+      (video) => video.toWatch == true || video.toWatch == null
+    );
   };
-
-  const filterVideos = (videos, genre) => {
+  function filterVideos(videos, genre) {
     return videos.filter((video) => video.tags.includes(genre));
-  };
+  }
+  const noOfVideo = toWatch(video).length;
 
   return (
     <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
       <Header account={account} />
-
-      <Section
-        genre={"Movies by Pixar"}
-        videos={filterVideos(video, "Pixar")}
-      />
-      <Section genre={"Recommended for you"} videos={unSeenVideos(video)} />
+      {noOfVideo > 0 && (
+        <div>
+          <Section genre={"Your Watchist"} videos={toWatch(video)} />
+          <Section
+            genre={"Family Movies "}
+            videos={filterVideos(video, "Family")}
+          />
+          <Section
+            genre={"Action Movies"}
+            videos={filterVideos(video, "Action")}
+          />
+        </div>
+      )}
+      {noOfVideo == 0 && (
+        <div className="text-center mt-32">
+          <Image
+            className="object-contain"
+            width={200}
+            height={200}
+            src={W}
+            alt="Logo"
+          />
+          <p className="text-3xl mt-6">Your Watchlist is empty</p>
+          <p className="mt-6">
+            Content you add to your playlist will get added here.
+          </p>
+        </div>
+      )}
     </main>
   );
 };
 
-export default pixar;
+export default watchlist;

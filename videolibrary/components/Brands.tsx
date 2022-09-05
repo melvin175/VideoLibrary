@@ -1,9 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 function Brands() {
   return (
-    <section className="flex flex-col md:flex-row justify-center items-center mt-10 gap-6 px-8 max-w-[1400px] mx-auto">
+    <motion.section
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          scale: 0.8,
+          opacity: 0,
+        },
+        visible: {
+          scale: 1,
+          opacity: 1,
+          transition: {
+            delay: 0.2,
+          },
+        },
+      }}
+      className="flex flex-col md:flex-row justify-center items-center mt-10 gap-6 px-8 max-w-[1400px] mx-auto"
+    >
       <div className="brand group">
         <Image src="/images/disnep.png" layout="fill" objectFit="cover" />
         <Link href="/disnep">
@@ -76,7 +94,7 @@ function Brands() {
           </video>
         </Link>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

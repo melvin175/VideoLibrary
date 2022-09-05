@@ -61,7 +61,7 @@ export const getServerSideProps = async (pageContext) => {
   };
 };
 
-const pixar = ({ video, account }) => {
+const originals = ({ video, account }) => {
   const unSeenVideos = (videos) => {
     return videos.filter((video) => video.seen == false || video.seen == null);
   };
@@ -73,14 +73,17 @@ const pixar = ({ video, account }) => {
   return (
     <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
       <Header account={account} />
-
       <Section
-        genre={"Movies by Pixar"}
-        videos={filterVideos(video, "Pixar")}
+        genre={"Originals By Disney"}
+        videos={filterVideos(video, "Disney")}
       />
       <Section genre={"Recommended for you"} videos={unSeenVideos(video)} />
+      <Section
+        genre={"Animated Movies"}
+        videos={filterVideos(video, "Animation")}
+      />
     </main>
   );
 };
 
-export default pixar;
+export default originals;

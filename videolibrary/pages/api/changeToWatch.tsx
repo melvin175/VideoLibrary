@@ -14,7 +14,7 @@ export default async ({ body }, res) => {
         mutation($slug: String!) {
           updateVideo(where: 
             { slug: $slug}, 
-            data: { seen: true}
+            data: {toWatch: true}
           ) {
             id,
             title,
