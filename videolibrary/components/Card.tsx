@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 const Card = ({ video }) => {
   const [url, setUrl] = useState(video.thumbnail.url);
 
-const Card = ({ thumbnail }) => {
   return (
     <motion.div
       initial="hidden"
