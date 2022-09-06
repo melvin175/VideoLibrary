@@ -29,11 +29,11 @@ const Card = ({ video }) => {
     >
       <a className="absolute inset-0 z-10 flex flex-col justify-end opacity-0 hover:opacity-100 duration-300  ">
         <div className="bg-black bg-opacity-50 h-full">
-          <div className="mt-[25%] pl-6 text-xl text-opacity-100">
+          <div className="mt-[20%] pl-6 text-xl text-opacity-100">
             <h1 className="tracking-wider text-white-900 font-bold">
               {video.title}
             </h1>
-            <p className="line-clamp-2 font-semibold">{video.desription}</p>
+            <p className="line-clamp-2 font-medium">{video.desription}</p>
             <div className="flex">
               <p className="font-normal">{video.year}</p>
               <motion.button
