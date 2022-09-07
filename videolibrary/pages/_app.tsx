@@ -4,6 +4,7 @@ import Head from "next/head";
 
 export default function App({
   Component,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   pageProps: { session, ...pageProps },
 }) {
   return (

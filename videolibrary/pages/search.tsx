@@ -7,7 +7,7 @@ import Section from "../components/Section";
 import Image from "next/image";
 import W from "../public/images/w.png";
 
-export const getServerSideProps = async (pageContext) => {
+export const getServerSideProps = async () => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
   const graphQLClient = new GraphQLClient(url, {
     headers: {

@@ -1,5 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import Image from "next/image";
 import Header from "../../components/Header";
@@ -128,8 +128,12 @@ const Video = ({ video, account, rData }) => {
   const [toWatch, setToWatch] = useState(video[0].toWatch);
   const [videoTags, setVideoTags] = useState(video[0].tags);
 
-  const unSeenVideos = (videos) => {
-    return videos.filter((video) => video.seen == false || video.seen == null);
+  useEffect(() => {
+    setVideoTags(video[0].tags);
+  });
+
+  const filterVideos = (videos, genre) => {
+    return videos.filter((video) => video.tags.includes(genre));
   };
 
   return (
@@ -276,7 +280,7 @@ const Video = ({ video, account, rData }) => {
             <div>
               <Sectioncol
                 genre={"Originals By Disney"}
-                videos={unSeenVideos(rData)}
+                videos={filterVideos(rData, "Comedy")}
               />
             </div>
           </motion.div>

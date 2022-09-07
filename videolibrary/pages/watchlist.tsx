@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 import { gql, GraphQLClient } from "graphql-request";
 
 import Header from "../components/Header";

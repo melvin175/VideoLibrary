@@ -47,7 +47,7 @@ function MainSlider() {
                 <SwiperSlide key={`content__${banner.name}`}>
                   <div
                     className="content "
-                    onClick={(e) =>
+                    onClick={() =>
                       router.push(
                         `/video/${banner.name
                           .toLowerCase()
@@ -76,7 +76,7 @@ function MainSlider() {
                 <SwiperSlide key={`content__${banner.name}`}>
                   <div
                     className="content"
-                    onClick={(e) =>
+                    onClick={() =>
                       router.push(
                         `/video/${banner.name
                           .toLowerCase()

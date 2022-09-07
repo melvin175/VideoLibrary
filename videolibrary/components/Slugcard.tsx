@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
 
 const Card = ({ video }) => {
   const [url, setUrl] = useState(video.thumbnail.url);
+
+  useEffect(() => {
+    setUrl(video.thumbnail.url);
+  });
 
   return (
     <motion.div

@@ -5,7 +5,7 @@ import { gql, GraphQLClient } from "graphql-request";
 import Header from "../components/Header";
 import Section from "../components/Section";
 
-export const getServerSideProps = async (pageContext) => {
+export const getServerSideProps = async () => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
   const graphQLClient = new GraphQLClient(url, {
     headers: {

@@ -5,7 +5,7 @@ import { gql, GraphQLClient } from "graphql-request";
 import Header from "../components/Header";
 import Section from "../components/Section";
 
-export const getServerSideProps = async (pageContext) => {
+export const getServerSideProps = async () => {
   const url = `https://api-ap-south-1.graphcms.com/v2/cl45xapc418yv01z32u90atx1/master`;
   const graphQLClient = new GraphQLClient(url, {
     headers: {
@@ -69,7 +69,7 @@ const pixar = ({ video, account }) => {
   const filterVideos = (videos, genre) => {
     return videos.filter((video) => video.tags.includes(genre));
   };
-  
+
   return (
     <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-1]">
       <Header account={account} />
